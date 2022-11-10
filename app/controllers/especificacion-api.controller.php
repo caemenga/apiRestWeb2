@@ -94,14 +94,4 @@ class SpecificationController{
         $specification = $this->model->get($id);
         $this->view->response( $specification);
     }
-    public function getSpecificationsByOrder($params = null){
-        $order = $params[':ORDER'];
-        if($order == "DESC"){
-        $specifications = $this->model->getAllDESC();
-        $this->view->response($specifications);
-        }elseif($order == "ASC"){
-            $specifications = $this->model->getAllASC();
-            $this->view->response($specifications);
-        }
-    }
 }

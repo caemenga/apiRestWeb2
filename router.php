@@ -17,6 +17,5 @@ $router->addRoute('specifications/:ID', 'GET', 'SpecificationController', 'getSp
 $router->addRoute('specifications', 'POST', 'SpecificationController', 'insertSpecification');
 $router->addRoute('specifications/:ID', 'DELETE', 'SpecificationController', 'deleteSpecification');
 $router->addRoute('specifications/:ID', 'PUT', 'SpecificationController', 'updateSpecification');
-$router->addRoute('specifications-order/:ORDER', 'GET', 'SpecificationController', 'getSpecificationsByOrder');
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
