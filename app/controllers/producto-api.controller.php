@@ -1,13 +1,18 @@
 <?php
 require_once './app/models/product.model.php';
 require_once './app/views/api.view.php';
+require_once './app/helpers/auth-api.helper.php';
+
+
 class ProductController{
     private $model;
     private $view;
     private $data;
+    private $helper;
     public function __construct(){
         $this->model = new ProductModel();
         $this->view = new ApiView();
+        $this->helper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
     }
 
@@ -59,6 +64,10 @@ class ProductController{
     }
 
     public function deleteProduct($params = null){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }else{
         $id = $params[':ID'];
         $product = $this->model->get($id);
         if($product){
@@ -66,19 +75,30 @@ class ProductController{
             $this->view->response($product);
         }else
             $this->view->response("el producto con id=$id no existe", 404);
-    }
+        }
+    }   
+    
 
     public function insertProduct(){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $product = $this->getData();
 
         if((empty($product->producto))||(empty($product->marca))){
             $this->view->response("complete todos los datos", 400);
-        }else
+        }else{
             $id = $this->model->insert($product->producto, $product->marca);
             $product = $this->model->get($id);
             $this->view->response($product, 201);
+        }
     }
     public function updateProduct($params = null){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $product = $this->getData();
         $id = $params[':ID'];
         

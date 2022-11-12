@@ -1,14 +1,17 @@
 <?php
 require_once './app/models/specification.model.php';
 require_once './app/views/api.view.php';
+require_once './app/helpers/auth-api.helper.php';
 class SpecificationController{
     private $model;
     private $view;
     private $data;
+    private $helper;
 
     public function __construct(){
         $this->model = new SpecificationModel();
         $this->view = new ApiView();
+        $this->helper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
     }
 
@@ -61,6 +64,10 @@ class SpecificationController{
     }
 
     public function insertSpecification($params = null){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $specification = $this->getData();
     
             if((empty($specification->tipo))||(empty($specification->descripcion))||(empty($specification->precio))||(empty($specification->stock))){
@@ -74,6 +81,10 @@ class SpecificationController{
     }
 
     public function deleteSpecification($params = null){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $id = $params[':ID'];
         $specification = $this->model->get($id);
         if($specification){
@@ -84,6 +95,10 @@ class SpecificationController{
     }
 
     public function updateSpecification($params = null){
+        if(!$this->helper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $specification = $this->getData();
         $id = $params[':ID'];
         

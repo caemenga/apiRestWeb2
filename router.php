@@ -2,6 +2,7 @@
 require_once './libs/router.php';
 require_once './app/controllers/producto-api.controller.php';
 require_once './app/controllers/especificacion-api.controller.php';
+require_once './app/controllers/auth-api.controller.php';
 
 
 $router = new Router();
@@ -17,5 +18,7 @@ $router->addRoute('specifications/:ID', 'GET', 'SpecificationController', 'getSp
 $router->addRoute('specifications', 'POST', 'SpecificationController', 'insertSpecification');
 $router->addRoute('specifications/:ID', 'DELETE', 'SpecificationController', 'deleteSpecification');
 $router->addRoute('specifications/:ID', 'PUT', 'SpecificationController', 'updateSpecification');
+//auth
+$router->addRoute("auth/token", 'GET', 'AuthApiController', 'getToken');
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
