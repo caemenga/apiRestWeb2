@@ -39,11 +39,17 @@ class ProductController{
                     $products = $this->model->paginate($start,$limit);
                     $this->view->response($products);
                 }else
-                $this->view->response("debe ingresar un numero", 400);
-
+                    $this->view->response("debe ingresar un numero", 400);
             }catch (PDOException $e){
                 $this->view->response("ingrese numeros positivos para la paginacion", 400);
             }
+        }
+        // /api/products?filter=columna&value=valor
+        elseif(isset($_GET['filter'])&&(isset($_GET['value']))){
+            $filter = $_GET['filter'];
+            $value = $_GET['value'];
+            $products = $this->model->getByFilter($filter, $value);
+            $this->view->response($products);
         }
         else{
             $products = $this->model->getAll();

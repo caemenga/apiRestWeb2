@@ -45,6 +45,13 @@ class SpecificationController{
                 $this->view->response("ingrese numeros positivos para la paginacion", 400);
             }
         }
+       // /api/specifications?filter=columna&value=valor
+       if((isset($_GET['filter']))&&(isset($_GET['value']))){
+        $filter = $_GET['filter'];
+        $value = $_GET['value'];
+        $specifications = $this->model->getByFilter($filter, $value);
+        $this->view->response($specifications);
+       }
         else{
         $specifications = $this->model->getAll();
         $this->view->response($specifications);

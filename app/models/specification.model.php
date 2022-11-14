@@ -4,7 +4,7 @@ class SpecificationModel{
     private $db;
     
     public function __construct(){
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tiendabebidas;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tienda;charset=utf8', 'root', '');
     }
 
     public function getAll(){
@@ -58,6 +58,13 @@ class SpecificationModel{
    
    public function paginate($start, $limit){
     $query = $this->db->prepare("SELECT * FROM especificaciones LIMIT $limit OFFSET $start");
+    $query->execute();
+    $specifications = $query->fetchAll(PDO::FETCH_OBJ);
+        
+    return $specifications;
+   }
+   public function getByFilter($filter, $value){
+    $query= $this->db->prepare("SELECT * FROM especificaciones WHERE $filter LIKE '$value'");
     $query->execute();
     $specifications = $query->fetchAll(PDO::FETCH_OBJ);
         
