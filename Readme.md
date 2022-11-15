@@ -42,15 +42,15 @@ La tabla especificaciones cuenta con las siguientes columnas : tipo, descripcion
 
 obtener todas las especificaciones: http://localhost/web2/TPEapiRest/api/specifications.
 
-obtener un producto por id: http://localhost/web2/TPEapiRest/api/specifications/:ID.
+obtener una especificacion por id: http://localhost/web2/TPEapiRest/api/specifications/:ID.
 
-borrar producto: http://localhost/web2/TPEapiRest/api/specifications/:ID.
+borrar especificacion: http://localhost/web2/TPEapiRest/api/specifications/:ID.
 
-editar producto: http://localhost/web2/TPEapiRest/api/specifications/:ID.
+editar especificacion: http://localhost/web2/TPEapiRest/api/specifications/:ID.
 
-agregar producto: http://localhost/web2/TPEapiRest/api/specifications.
+agregar especificacion: http://localhost/web2/TPEapiRest/api/specifications.
 
-obtener especificaciones ordenadas por precio: http://localhost/web2/TPEapiRest/api/specifications/api/products?orderby=orden.
+obtener especificaciones ordenadas por precio: http://localhost/web2/TPEapiRest/api/specifications?orderby=orden.
 
 mismas indicaciones para el ordenamiento de los productos.
 

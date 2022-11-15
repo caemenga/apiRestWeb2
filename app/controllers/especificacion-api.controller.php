@@ -77,10 +77,10 @@ class SpecificationController{
         }
         $specification = $this->getData();
     
-            if((empty($specification->tipo))||(empty($specification->descripcion))||(empty($specification->precio))||(empty($specification->stock))){
+            if((empty($specification->tipo))||(empty($specification->descripcion))||(empty($specification->precio))){
                 $this->view->response("complete todos los datos", 400);
             }else
-                $id = $this->model->insert($specification->tipo, $specification->descripcion, $specification->precio, $specification->stock);
+                $id = $this->model->insert($specification->tipo, $specification->descripcion, $specification->precio);
                 $specification = $this->model->get($id);
                 $this->view->response($specification, 201);
         
@@ -109,10 +109,10 @@ class SpecificationController{
         $specification = $this->getData();
         $id = $params[':ID'];
         
-        if((empty($specification->tipo))||(empty($specification->descripcion))||(empty($specification->precio))||(empty($specification->stock))){
+        if((empty($specification->tipo))||(empty($specification->descripcion))||(empty($specification->precio))){
             $this->view->response("complete todos los datos", 400);
         }else
-        $this->model->update($specification->tipo, $specification->descripcion, $specification->precio, $specification->stock, $id);
+        $this->model->update($specification->tipo, $specification->descripcion, $specification->precio, $id);
         $specification = $this->model->get($id);
         $this->view->response( $specification);
     }

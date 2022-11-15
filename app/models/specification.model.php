@@ -21,9 +21,9 @@ class SpecificationModel{
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
-    public function insert($tipo, $descripcion, $precio, $stock){
-        $query = $this->db->prepare("INSERT INTO especificaciones (tipo, descripcion, precio, stock) VALUES(?,?,?,?)");
-        $query->execute([$tipo, $descripcion, $precio, $stock]);
+    public function insert($tipo, $descripcion, $precio){
+        $query = $this->db->prepare("INSERT INTO especificaciones (tipo, descripcion, precio) VALUES(?,?,?)");
+        $query->execute([$tipo, $descripcion, $precio]);
         return $this->db->lastInsertId();
     }
 
@@ -32,9 +32,9 @@ class SpecificationModel{
         $query->execute([$id]);
         return $query->fetch(PDO::FETCH_OBJ);
     }
-    public function update($tipo, $descripcion, $precio, $stock, $id){
-        $query = $this->db->prepare("UPDATE especificaciones SET tipo =?, descripcion =?, precio=?, stock=? WHERE id_especificacion=?");
-        $query->execute([$tipo, $descripcion, $precio, $stock, $id]);
+    public function update($tipo, $descripcion, $precio, $id){
+        $query = $this->db->prepare("UPDATE especificaciones SET tipo =?, descripcion =?, precio=? WHERE id_especificacion=?");
+        $query->execute([$tipo, $descripcion, $precio, $id]);
         return $this->db->lastInsertId();
     }
    public function getAllOrder($order){
