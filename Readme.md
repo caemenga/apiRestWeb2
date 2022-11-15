@@ -1,6 +1,6 @@
 #proyecto# : api rest para la materia web 2 de la carrera TUDAI.
 
-api rest sencilla para poder utilizar desde phpMyAdmin, con el objetivo de manejar un CRUD de uuna tienda de bebidas.
+api rest sencilla para poder utilizar con base de datos en phpMyadmin, con el objetivo de manejar un CRUD de una tienda de bebidas.
 ------------------------------------------------------------------------------------------
 **como usar : endpoints.**
 **Tabla de Productos.**
@@ -81,3 +81,27 @@ Por ejemplo para filtrar por la columa **tipo** y el valor sea **ipa** escribir 
 **usar este endpoint para obtener el token, el cual nos va a autorizar a editar, agregar, y eliminar productos y especificaciones.**
 
 obtener token de autorizacion:   http://localhost/web2/TPEapiRest/api/auth/token.
+
+----------------------------------------------------------------------------
+
+**JSON QUE SE PUEDEN USAR PARA LAS PRUEBAS**
+producto- Para hacer post, no agregar id_producto.
+
+{
+    "id_producto": 25,
+    "producto": "vino",
+    "marca": "septima",
+    "id_especificacion_fk": 3
+}
+
+
+especificacion-Para el post no agregar id_especificacion.
+
+
+
+{
+    "id_especificacion": 4,
+    "tipo": "espumante",
+    "descripcion": "rica cerveza roja",
+    "precio": 400
+}
