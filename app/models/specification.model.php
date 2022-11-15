@@ -38,7 +38,7 @@ class SpecificationModel{
         return $this->db->lastInsertId();
     }
    public function getAllOrder($order){
-    if ($order == "ASC"){
+    if ($order == "asc"){
     $query = $this->db->prepare("SELECT * FROM especificaciones ORDER BY precio");
     $query->execute();
 
@@ -46,7 +46,7 @@ class SpecificationModel{
         
     return $specifications;
     }
-    if($order =="DESC"){
+    if($order =="desc"){
     $query = $this->db->prepare("SELECT * FROM especificaciones ORDER BY precio DESC");
     $query->execute();
 

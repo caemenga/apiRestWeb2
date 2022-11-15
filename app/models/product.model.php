@@ -40,13 +40,13 @@ class ProductModel{
     }
 
     public function getAllOrder($order=null){
-        if ($order == "ASC"){
+        if ($order == "asc"){
             $query = $this->db->prepare("SELECT * FROM productos ORDER BY marca");
             $query->execute();        
             $products = $query->fetchAll(PDO::FETCH_OBJ);   
             return $products;
             }
-            if($order =="DESC"){
+            if($order =="desc"){
             $query = $this->db->prepare("SELECT * FROM productos ORDER BY marca DESC");
             $query->execute(); 
             $products = $query->fetchAll(PDO::FETCH_OBJ);            
@@ -66,6 +66,13 @@ class ProductModel{
         $query->execute();
         $products = $query->fetchAll(PDO::FETCH_OBJ);
         
+        return $products;
+    }
+
+    public function getOrderByFilter($filter, $order){
+        $query = $this->db->prepare("SELECT * FROM productos ORDER BY $filter $order");
+        $query->execute(); 
+        $products = $query->fetchAll(PDO::FETCH_OBJ);            
         return $products;
     }
 

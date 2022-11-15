@@ -23,8 +23,8 @@ class ProductController{
     public function getProducts($params = null){
 
         //ordenar
-        //endpoint: /api/products?orderby=precio
-        if (isset($_GET['orderby'])){
+        //endpoint: /api/products?orderby=marca
+        if (isset($_GET['orderby'])&&(!isset($_GET['filter']))){
             $products = $this->model->getAllOrder($_GET['orderby']);
             $this->view->response($products);
         }
@@ -49,8 +49,19 @@ class ProductController{
             $filter = $_GET['filter'];
             $value = $_GET['value'];
             $products = $this->model->getByFilter($filter, $value);
-            $this->view->response($products);
+            if($products){
+                $this->view->response($products);
+            }else{
+               $this->view->response("la columna o el valor no existen", 400);
+            }    
         }
+        // /api/products?filter=field&orderby=asc/desc  para ordenar por columna seleccionada.
+        elseif (isset($_GET['filter'])&&(isset($_GET['orderby']))) {
+            $filter = $_GET['filter'];
+            $order = $_GET['orderby'];
+            $products = $this->model->getOrderByFilter($filter, $order);
+            $this->view->response($products);
+        } 
         else{
             $products = $this->model->getAll();
             $this->view->response($products);
