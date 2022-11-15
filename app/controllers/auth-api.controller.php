@@ -52,7 +52,7 @@ class AuthApiController{
             );
             $payload = array(
                 'id' => 1,
-                'name' => "Nico",
+                'name' => "caetano",
                 'exp' => time()+3600
             );
             $header = base64url_encode(json_encode($header));

@@ -92,10 +92,10 @@ class ProductController{
         }
         $product = $this->getData();
 
-        if((empty($product->producto))||(empty($product->marca))){
+        if((empty($product->producto))||(empty($product->marca))&&(empty($product->id_especificacion_fk))){
             $this->view->response("complete todos los datos", 400);
         }else{
-            $id = $this->model->insert($product->producto, $product->marca);
+            $id = $this->model->insert($product->producto, $product->marca, $product->id_especificacion_fk);
             $product = $this->model->get($id);
             $this->view->response($product, 201);
         }
@@ -108,10 +108,10 @@ class ProductController{
         $product = $this->getData();
         $id = $params[':ID'];
         
-        if((empty($product->producto))||(empty($product->marca))){
+        if((empty($product->producto))||(empty($product->marca))&&(empty($product->id_especificacion_fk))){
             $this->view->response("complete todos los datos", 400);
         }else
-        $this->model->update($product->producto, $product->marca, $id);
+        $this->model->update($product->producto, $product->marca, $id, $product->id_especificacion_fk);
         $product = $this->model->get($id);
         $this->view->response($product);
     }

@@ -28,14 +28,14 @@ class ProductModel{
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    public function insert($producto, $marca){
-        $query = $this->db->prepare("INSERT INTO productos (producto, marca) VALUES(?,?)");
-        $query->execute([$producto, $marca]);
+    public function insert($producto, $marca, $idSpe){
+        $query = $this->db->prepare("INSERT INTO productos (producto, marca, id_especificacion_fk) VALUES(?,?,?)");
+        $query->execute([$producto, $marca, $idSpe]);
         return $this->db->lastInsertId();
     }
-    public function update($producto, $marca, $id){
-        $query = $this->db->prepare("UPDATE productos SET producto =?, marca =? WHERE id_producto=?");
-        $query->execute([$producto, $marca, $id]);
+    public function update($producto, $marca, $id, $idSpe){
+        $query = $this->db->prepare("UPDATE productos SET producto =?, marca =?, id_especificacion_fk=? WHERE id_producto=?");
+        $query->execute([$producto, $marca,$idSpe, $id]);
         return $this->db->lastInsertId();
     }
 
