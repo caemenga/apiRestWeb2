@@ -46,7 +46,7 @@ class SpecificationController{
             }
         }
        // /api/specifications?filter=columna&value=valor
-       if((isset($_GET['filter']))&&(isset($_GET['value']))){
+       elseif((isset($_GET['filter']))&&(isset($_GET['value']))){
         $filter = $_GET['filter'];
         $value = $_GET['value'];
         $specifications = $this->model->getByFilter($filter, $value);
