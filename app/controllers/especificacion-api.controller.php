@@ -23,8 +23,13 @@ class SpecificationController{
         //ordenar
         //endpoint: /api/specifications?orderby=precio
         if (isset($_GET['orderby'])){
-            $specifications = $this->model->getAllOrder($_GET['orderby']);
+            $order = $_GET['orderby'];
+            strtolower($orderby);
+            if($orderby == "asc" || $orderby == "desc"){
+            $specifications = $this->model->getAllOrder($order);
             $this->view->response($specifications);
+            }else
+                $this->view->response("Incorrect params", 400);
         }
         //paginacion
         //endpoint: /api/specifications?page=page?limit=limit
@@ -49,8 +54,11 @@ class SpecificationController{
        elseif((isset($_GET['filter']))&&(isset($_GET['value']))){
         $filter = $_GET['filter'];
         $value = $_GET['value'];
+        if($filter == "precio" || $filter=="tipo" || $filter=="descripcion"){
         $specifications = $this->model->getByFilter($filter, $value);
         $this->view->response($specifications);
+        }else
+            $this->view->response("Incorrect params", 400);
        }
         else{
         $specifications = $this->model->getAll();
