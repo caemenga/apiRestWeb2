@@ -22,11 +22,19 @@ class ProductController{
 
     public function getProducts($params = null){
 
+        $paramers = $this->paramers();
+
+
         //ordenar
         //endpoint: /api/products?orderby=marca
         if (isset($_GET['orderby'])&&(!isset($_GET['filter']))){
-            $products = $this->model->getAllOrder($_GET['orderby']);
+            $orderby = $_GET['orderby'];
+            strtolower($orderby);
+            if($orderby == "asc" || $orderby == "desc"){
+            $products = $this->model->getAllOrder($orderby);
             $this->view->response($products);
+            }else
+            $this->view->response("Incorrect params", 400);
         }
         //paginacion
         //endpoint: /api/products?page=page&limit=limit
@@ -48,19 +56,26 @@ class ProductController{
         elseif(isset($_GET['filter'])&&(isset($_GET['value']))){
             $filter = $_GET['filter'];
             $value = $_GET['value'];
+            if(($filter == "producto" || $filter == "marca")&&($value=="cerveza"||$value=="vino"||$value=="tequila")){
+
+            
             $products = $this->model->getByFilter($filter, $value);
             if($products){
                 $this->view->response($products);
             }else{
                $this->view->response("la columna o el valor no existen", 400);
-            }    
+            }}else
+                $this->view->response("Incorrect params", 400);
         }
         // /api/products?filter=field&orderby=asc/desc  para ordenar por columna seleccionada.
         elseif (isset($_GET['filter'])&&(isset($_GET['orderby']))) {
             $filter = $_GET['filter'];
             $order = $_GET['orderby'];
+            if(($filter=="producto"||$filter=="marca")&&($order == "asc" || $order == "desc")){
             $products = $this->model->getOrderByFilter($filter, $order);
             $this->view->response($products);
+        }else
+            $this->view->response("Incorrect params", 400);
         } 
         else{
             $products = $this->model->getAll();
@@ -78,6 +93,16 @@ class ProductController{
             $this->view->response("el producto con id=$id no existe", 404);
         }
         
+    }
+    function paramers () {
+        $paramers = array(
+        'producto' => 'producto',
+        'marca' => 'marca',
+        'id_especificacion_fk' => 'id_especificacion_fk',
+        'asc' => 'asc',
+        'desc' => 'desc',
+        );
+    return $paramers;
     }
 
     public function deleteProduct($params = null){
