@@ -23,6 +23,9 @@ class ProductController{
     public function getProducts($params = null){
 
         $paramers = $this->paramers();
+        $orderby = null;
+        $filter = null;
+        $value = null;
 
 
         //ordenar
@@ -30,7 +33,7 @@ class ProductController{
         if (isset($_GET['orderby'])&&(!isset($_GET['filter']))){
             $orderby = $_GET['orderby'];
             strtolower($orderby);
-            if($orderby == "asc" || $orderby == "desc"){
+            if($paramers[$orderby]){
             $products = $this->model->getAllOrder($orderby);
             $this->view->response($products);
             }else
@@ -56,13 +59,11 @@ class ProductController{
         elseif(isset($_GET['filter'])&&(isset($_GET['value']))){
             $filter = $_GET['filter'];
             $value = $_GET['value'];
-            if(($filter == "producto" || $filter == "marca")&&($value=="cerveza"||$value=="vino"||$value=="tequila")){
-
-            
+            if($paramers[$filter]&& $paramers[$value]){
             $products = $this->model->getByFilter($filter, $value);
-            if($products){
+                if($products){
                 $this->view->response($products);
-            }else{
+                }else{
                $this->view->response("la columna o el valor no existen", 400);
             }}else
                 $this->view->response("Incorrect params", 400);
@@ -70,9 +71,9 @@ class ProductController{
         // /api/products?filter=field&orderby=asc/desc  para ordenar por columna seleccionada.
         elseif (isset($_GET['filter'])&&(isset($_GET['orderby']))) {
             $filter = $_GET['filter'];
-            $order = $_GET['orderby'];
-            if(($filter=="producto"||$filter=="marca")&&($order == "asc" || $order == "desc")){
-            $products = $this->model->getOrderByFilter($filter, $order);
+            $orderby = $_GET['orderby'];
+            if($paramers[$filter]&&$paramers[$orderby]){
+            $products = $this->model->getOrderByFilter($filter, $orderby);
             $this->view->response($products);
         }else
             $this->view->response("Incorrect params", 400);
@@ -98,6 +99,17 @@ class ProductController{
         $paramers = array(
         'producto' => 'producto',
         'marca' => 'marca',
+        'cerveza' => 'cerveza',
+        'vino' => 'vino',
+        'tequila' => 'tequila',
+        'septima' => 'septima',
+        'chacabuco' => 'chacabuco', 
+        'herrero' => 'herrero',
+        'futer' => 'futer',
+        'pampa' => 'pampa',
+        'bianchi'=>'bianchi',
+        'patagonia' => 'patagonia',
+        'quilmes' => 'quilmes',
         'id_especificacion_fk' => 'id_especificacion_fk',
         'asc' => 'asc',
         'desc' => 'desc',
