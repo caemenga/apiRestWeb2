@@ -20,13 +20,17 @@ class SpecificationController{
     }
 
     public function getSpecifications($params = null){
+        $paramers = $this->paramers();
+        $orderby = null;
+        $filter = null;
+        $value = null;
         //ordenar
         //endpoint: /api/specifications?orderby=precio
         if (isset($_GET['orderby'])){
-            $order = $_GET['orderby'];
+            $orderby = $_GET['orderby'];
             strtolower($orderby);
-            if($orderby == "asc" || $orderby == "desc"){
-            $specifications = $this->model->getAllOrder($order);
+            if($paramers[$orderby]){
+            $specifications = $this->model->getAllOrder($orderby);
             $this->view->response($specifications);
             }else
                 $this->view->response("Incorrect params", 400);
@@ -54,7 +58,7 @@ class SpecificationController{
        elseif((isset($_GET['filter']))&&(isset($_GET['value']))){
         $filter = $_GET['filter'];
         $value = $_GET['value'];
-        if($filter == "precio" || $filter=="tipo" || $filter=="descripcion"){
+        if($paramers[$filter] && $paramers[$value]){
         $specifications = $this->model->getByFilter($filter, $value);
         $this->view->response($specifications);
         }else
@@ -124,4 +128,24 @@ class SpecificationController{
         $specification = $this->model->get($id);
         $this->view->response( $specification);
     }
+
+    function paramers (){
+        $paramers = array(
+            'precio' => 'precio',
+            'tipo' => 'tipo',
+            'asc' => 'asc',
+            'desc' => 'desc',
+            'artesanal' => 'artesanal',
+            'ipa' => 'ipa',
+            'apa' => 'apa',
+            'roja' => 'roja',
+            'negra' => 'negra',
+            'rubia' => 'rubia',
+            'malbec' => 'malbec',
+            'blanco' => 'blanco',
+            'espumante' => 'espumante',
+        );
+        return $paramers;
+    }
+
 }
