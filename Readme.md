@@ -1,6 +1,8 @@
 #proyecto# : api rest para la materia web 2 de la carrera TUDAI.
+------------------------------------------------------------------------------------------
 
-api rest sencilla para poder utilizar con base de datos en phpMyadmin, con el objetivo de manejar un CRUD de una tienda de bebidas.
+Api rest sencilla para poder utilizar con base de datos en phpMyadmin, con el objetivo de manejar un CRUD de una tienda de bebidas.
+
 ------------------------------------------------------------------------------------------
 **endpoints.**
 -----------------------------------------------------------------------------------------
