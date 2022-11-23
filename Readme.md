@@ -2,7 +2,17 @@
 
 api rest sencilla para poder utilizar con base de datos en phpMyadmin, con el objetivo de manejar un CRUD de una tienda de bebidas.
 ------------------------------------------------------------------------------------------
-**como usar : endpoints.**
+**endpoints.**
+-----------------------------------------------------------------------------------------
+
+**Obtener Token**
+
+Con Metodo GET.
+
+obtener token de autorizacion:   http://localhost/web2/TPEapiRest/api/auth/token.
+
+----------------------------------------------------------------------------
+
 **Tabla de Productos.**
 
 La tabla productos cuenta con las siguientes columnas : producto y marca.
@@ -45,6 +55,18 @@ Con metodo GET:
 http://localhost/web2/TPEapiRest/api/products?filter=campo&orderby=desc/asc.
 
 ------------------------------------------------------------------------------------------
+
+
+**filtrado de productos por alguno de sus campos:** Con Metodo GET
+
+http://localhost/web2/TPEapiRest/api/specifications?filter=columna&value=valor
+
+Ingrese en filter el nombre de la columna por la que quiere filtrar, y en value el valor que quiere recibir.
+Por ejemplo para filtrar por la columa **tipo** y el valor sea **ipa** escribir el siguiente endpoint http://localhost/web2/TPEapiRest/api/products?filter=tipo&value=ipa
+
+
+-----------------------------------------------------------------------------------------
+
 **tabla especificaciones.**
 
 La tabla especificaciones cuenta con las siguientes columnas : tipo, descripcion, y precio.
@@ -73,23 +95,6 @@ Un ejemplo: http://localhost/web2/TPEapiRest/api/specifications?page=3&limit=2, 
 
 -----------------------------------------------------------------------------------------
 
-**filtrado de productos por alguno de sus campos:** Con Metodo GET
-
-http://localhost/web2/TPEapiRest/api/specifications?filter=columna&value=valor
-
-Ingrese en filter el nombre de la columna por la que quiere filtrar, y en value el valor que quiere recibir.
-Por ejemplo para filtrar por la columa **tipo** y el valor sea **ipa** escribir el siguiente endpoint http://localhost/web2/TPEapiRest/api/products?filter=tipo&value=ipa
-
-
------------------------------------------------------------------------------------------
-
-**usar este endpoint para obtener el token, el cual nos va a autorizar a editar, agregar, y eliminar productos y especificaciones.**
-
-Con Metodo GET.
-
-obtener token de autorizacion:   http://localhost/web2/TPEapiRest/api/auth/token.
-
-----------------------------------------------------------------------------
 
 **JSON QUE SE PUEDEN USAR PARA LAS PRUEBAS**
 producto- Para hacer post, no agregar id_producto.
