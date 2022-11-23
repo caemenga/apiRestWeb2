@@ -23,18 +23,21 @@ La tabla productos cuenta con las siguientes columnas : producto y marca.
 Para obtener los productos ordenados, escribir luego del orderby= "ASC" si se quiere ordenar de manera ascendente, o "DESC" si se quiere de manera descendente. 
 
 Un ejemplo http://localhost/web2/TPEapiRest/api/products?orderby=DESC.
+
 ------------------------------------------------------------------------------------------
 **Paginacion de productos:** con metodo GET:  http://localhost/web2/TPEapiRest/api/products?page=page&limit=limit.
 
 ingresar en "page" la pagina que se quiere obtener, y en limit la cantidad de productos que se quieren por pagina.
 
 Un ejemplo:  http://localhost/web2/TPEapiRest/api/products?page=3&limit=4, para obtener la pagina 3, con un limite de 4 productos para cada pagina.
+
 -----------------------------------------------------------------------------------------
 **filtrado de productos por alguno de sus campos:** Con metodo GET.
 
 http://localhost/web2/TPEapiRest/api/products?filter=columna&value=valor
 
 Ingrese en filter el nombre de la columna por la que quiere filtrar, y en value el valor que quiere recibir.
+
 ------------------------------------------------------------------------------------------
 **Ordenamiento asc o desc de los productos por alguno de sus campos**
 Con metodo GET:
